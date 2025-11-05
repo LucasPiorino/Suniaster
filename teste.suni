@@ -1,0 +1,13 @@
+inteiro contador = 0
+lista nomes = ["Frieren", "Himmel", "Eisen", "Heiter"]
+
+enquanto contador é menor que 4 então
+    escreva("Herói: ", nomes[contador])
+    contador = contador + 1
+fim
+
+se contador é igual a 4 então
+    escreva("Viagem concluída.")
+senão
+    escreva("Ainda falta.")
+fim
