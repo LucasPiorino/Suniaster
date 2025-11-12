@@ -3,14 +3,10 @@ grammar Suniaster;
 // ============================================================================
 // PARTE 1: REGRAS DO PARSER
 // ============================================================================
-//
 // Ideia geral:
 // programa -> várias linhas;
 // linha -> pode ser declaração, comando, etc.
-// comando -> if/while/escreva/atribuição
-//
-// Também definimos expressões com precedência:
-// nivel lógico (e/ou) > comparação (> < == ...) > soma/sub > mult/div > primário
+// comando -> if/while/escreva/leia/atribuição
 // ============================================================================
 
 // programa completo: várias linhas até EOF
@@ -18,9 +14,6 @@ programa
     : linha* EOF
     ;
 
-// uma "linha" do programa pode ser:
-// - declaração de variável com atribuição inicial
-// - comando de controle/ação
 linha
     : declaracao
     | comando
@@ -28,8 +21,6 @@ linha
 
 // --------------------------------------------------------------------------
 // DECLARAÇÃO DE VARIÁVEL
-// Ex: inteiro contador = 0
-//     lista nomes = ["Frieren", "Himmel"]
 // --------------------------------------------------------------------------
 declaracao
     : TIPO ID ATRIB expressao
@@ -42,6 +33,7 @@ comando
     : condicional
     | repeticao
     | escrita
+    | leitura
     | atribuicao
     ;
 
@@ -75,8 +67,6 @@ repeticao
 
 // --------------------------------------------------------------------------
 // ESCREVA
-// escreva("texto", x, y)
-// escreva("Herói: ", nomes[contador])
 // --------------------------------------------------------------------------
 escrita
     : ESCREVA ABRE_PAREN listaArgs? FECHA_PAREN
@@ -88,16 +78,18 @@ listaArgs
     ;
 
 // --------------------------------------------------------------------------
+// LEIA
+// --------------------------------------------------------------------------
+leitura
+    : LEIA ABRE_PAREN destino FECHA_PAREN
+    ;
+
+// --------------------------------------------------------------------------
 // ATRIBUIÇÃO
-// x = x + 1
-// nomes[0] = "Frieren"
 // --------------------------------------------------------------------------
 atribuicao
     : destino ATRIB expressao
     ;
-
-// destino de atribuição pode ser uma variável simples (ID)
-// ou um acesso por índice: nomes[contador]
 destino
     : ID
     | ID ABRE_COL expressao FECHA_COL
@@ -106,17 +98,11 @@ destino
 // ============================================================================
 // EXPRESSÕES
 // ============================================================================
-//
-// Ordem de precedência que vamos aplicar (de menor prioridade pra maior):
-//
 // 1) exprLogica      -> usa 'e', 'ou', 'não' / && || !
 // 2) exprComparacao  -> x é maior que y, x >= y, x == y ...
 // 3) exprSoma        -> +, -, mais, menos
 // 4) exprMult        -> *, /, %, vezes, dividido por, resto de
 // 5) exprPrimaria    -> literais, IDs, chamadas de função, parênteses, listas
-//
-// A regra "expressao" começa do nível MAIS EXTERNO (lógica)
-// e vai descendo.
 // ============================================================================
 
 expressao
@@ -175,14 +161,10 @@ literal
 // ============================================================================
 // PARTE 2: TOKENS DO LEXER
 // ============================================================================
-//
-// IMPORTANTE: dividimos alguns operadores em categorias
 // OP_ARIT_SOMA: soma/sub (mais, menos, +, -)
 // OP_ARIT_MULT: mult/div/resto (*, /, %, vezes, dividido por, resto de)
 // OP_REL: comparação (>, <, >=, ... "é maior que", ...)
 // OP_LOG: lógico (e, ou, não, &&, ||, !)
-//
-// Também incluímos palavras-chave, tipos e símbolos.
 // ============================================================================
 
 // -------- Palavras-chave de controle --------
@@ -242,14 +224,7 @@ FECHA_COL   : ']';
 // ============================================================================
 // OPERADORES
 // ============================================================================
-//
-// Separação importante:
-// - OP_ARIT_SOMA: soma/sub
-// - OP_ARIT_MULT: mult/div/resto
-// Isso facilita a precedência, porque soma/sub tem menos prioridade que mult/div
-// e nós referenciamos cada grupo em exprSoma e exprMult.
-//
-// ---------------------------------------------------------------------------
+
 
 // Operadores de soma/subtração
 OP_ARIT_SOMA
@@ -295,11 +270,6 @@ OP_LOG
     | '!'
     ;
 
-// ============================================================================
-// IGNORAR ESPAÇOS E COMENTÁRIOS
-// Requisito do projeto: espaços em branco, tabs e quebras de linha devem ser
-// ignorados pelo parser. Também colocamos comentário de linha começando com //.
-// ============================================================================
 
 WS
     : [ \t\r\n]+ -> skip
