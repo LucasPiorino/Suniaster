@@ -11,7 +11,6 @@ if GV_BIN not in os.environ.get("PATH", ""):
     os.environ["PATH"] = GV_BIN + os.pathsep + os.environ.get("PATH", "")
 
 def gerar_arvore(caminho):
-    # Lê o código Suniaster
     stream = FileStream(caminho, encoding='utf-8')
     lexer = SuniasterLexer(stream)
     tokens = CommonTokenStream(lexer)

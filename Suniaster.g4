@@ -9,7 +9,7 @@ grammar Suniaster;
 // linha -> pode ser declaração, comando, etc.
 // comando -> if/while/escreva/leia/atribuição
 //
-// Também definimos expressões com precedência:
+// Expressões com precedência:
 // nivel lógico (e/ou) > comparação (> < == ...) > soma/sub > mult/div > primário
 // ============================================================================
 
@@ -192,7 +192,6 @@ literal
 // OP_REL: comparação (>, <, >=, ... "é maior que", ...)
 // OP_LOG: lógico (e, ou, não, &&, ||, !)
 //
-// Também incluímos palavras-chave, tipos e símbolos.
 // ============================================================================
 
 // -------- Palavras-chave de controle --------
@@ -222,7 +221,6 @@ TIPO
     ;
 
 // -------- Palavras reservadas para operadores (ANTES do ID) --------
-// CRÍTICO: Devem vir antes de ID para evitar serem capturados como identificadores
 MAIS_OP     : 'mais';
 MENOS_OP    : 'menos';
 VEZES_OP    : 'vezes';
@@ -316,7 +314,7 @@ OP_LOG
 // ============================================================================
 // IGNORAR ESPAÇOS E COMENTÁRIOS
 // Requisito do projeto: espaços em branco, tabs e quebras de linha devem ser
-// ignorados pelo parser. Também colocamos comentário de linha começando com //.
+// ignorados pelo parser.
 // ============================================================================
 
 WS
