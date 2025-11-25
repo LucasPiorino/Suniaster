@@ -5,12 +5,7 @@ from SuniasterParser import SuniasterParser
 from antlr4.tree.Trees import Trees
 import graphviz
 
-# >>>>>>>>>>>> AJUSTE IMPORTANTE: informe o caminho do Graphviz/bin <<<<<<<<<<<<
-# Troque este caminho se o seu Graphviz estiver instalado em outro lugar.
-# Exemplos comuns:
-#   r"C:\Program Files\Graphviz\bin"
-#   r"C:\Program Files (x86)\Graphviz\bin"
-#   r"C:\Users\SEU_USUARIO\AppData\Local\Programs\Graphviz\bin"
+
 GV_BIN = r"C:\Program Files\Graphviz\bin"
 if GV_BIN not in os.environ.get("PATH", ""):
     os.environ["PATH"] = GV_BIN + os.pathsep + os.environ.get("PATH", "")
@@ -23,36 +18,32 @@ def gerar_arvore(caminho):
     parser = SuniasterParser(tokens)
     arvore = parser.programa()
 
-    # Mostra a versão textual da árvore (útil pro relatório)
     texto = Trees.toStringTree(arvore, None, parser)
     print(texto)
 
-    # Cria o gráfico do Graphviz
     dot = graphviz.Digraph(comment="Árvore Sintática - Suniaster", format="png")
     dot.attr(rankdir='TB', splines='true', concentrate='true', nodesep='0.25', ranksep='0.35')
 
-    # Função recursiva para percorrer os nós e aplicar estilos
     def add_node(dot, node, parent_name=None):
         name = str(id(node))
-        # Usa os nomes das regras do parser
         label = Trees.getNodeText(node, parser.ruleNames)
 
-        # Estilos/cores para legibilidade
+
         cor = "black"
         forma = "ellipse"
 
         if label in ["programa", "linha", "bloco"]:
-            cor = "#0055FF"  # azul
+            cor = "#0055FF"  
             forma = "box"
         elif label in ["condicional", "repeticao", "escrita", "atribuicao", "declaracao"]:
-            cor = "#FF8800"  # laranja
+            cor = "#FF8800"  
             forma = "folder"
         elif label in ["expressao", "exprLogica", "exprComparacao", "exprSoma", "exprMult", "exprPrimaria", "acesso", "listaLiteral"]:
-            cor = "#00AA00"  # verde
+            cor = "#00AA00"  
         elif label in ["literal", "NUM_INT", "NUM_REAL", "STRING", "VERDADEIRO", "FALSO", "NULO"]:
-            cor = "#AA00FF"  # roxo
+            cor = "#AA00FF" 
         elif label in ["SE", "ENTAO", "SENAO", "FIM", "ENQUANTO", "ESCREVA"]:
-            cor = "#CC0000"  # vermelho
+            cor = "#CC0000"  
             forma = "diamond"
         elif label in ["TIPO", "ID", "ATRIB", "VIRGULA", "ABRE_PAREN", "FECHA_PAREN", "ABRE_COL", "FECHA_COL", "OP_REL", "OP_ARIT_SOMA", "OP_ARIT_MULT", "OP_LOG"]:
             cor = "#000000"
@@ -69,7 +60,6 @@ def gerar_arvore(caminho):
 
     add_node(dot, arvore)
 
-    # Renderiza e salva a imagem
     dot.render("Arvore_Sintatica_Suniaster", cleanup=True)
     print("✅ Árvore sintática salva como Arvore_Sintatica_Suniaster.png")
 

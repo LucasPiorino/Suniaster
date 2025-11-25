@@ -1,0 +1,8 @@
+lista frutas = ["maçã", "banana", "laranja"]
+inteiro indice = 0
+
+frutas[0] = "uva"
+escreva("Primeira fruta: ", frutas[indice])
+
+indice = 2
+escreva("Terceira fruta: ", frutas[indice])

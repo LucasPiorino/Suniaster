@@ -1,0 +1,9 @@
+inteiro a = 10
+inteiro b = 3
+
+inteiro soma = a mais b
+inteiro subtracao = a menos b
+inteiro produto = a vezes b
+
+escreva("Soma: ", soma)
+escreva("Produto: ", produto)

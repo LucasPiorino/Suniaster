@@ -1,0 +1,6 @@
+inteiro contador = 0
+
+enquanto contador é menor que 5 então
+    escreva("Número: ", contador)
+    contador = contador + 1
+fim

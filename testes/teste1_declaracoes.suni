@@ -1,0 +1,5 @@
+inteiro idade = 25
+real altura = 1.75
+booleano ativo = verdadeiro
+lista nomes = ["Ana", "Bruno", "Carlos"]
+vetor numeros = [10, 20, 30]

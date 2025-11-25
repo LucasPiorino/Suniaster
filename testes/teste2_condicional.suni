@@ -1,0 +1,7 @@
+inteiro nota = 85
+
+se nota >= 70 então
+    escreva("Aprovado")
+senão
+    escreva("Reprovado")
+fim

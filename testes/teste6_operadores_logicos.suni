@@ -1,0 +1,11 @@
+inteiro x = 10
+inteiro y = 5
+booleano resultado = falso
+
+se x > y então
+    resultado = verdadeiro
+fim
+
+se resultado == verdadeiro então
+    escreva("Condição verdadeira")
+fim

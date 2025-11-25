@@ -1,0 +1,5 @@
+inteiro idade = 0
+
+escreva("Digite sua idade: ")
+leia(idade)
+escreva("Você tem ", idade, " anos")

@@ -1,0 +1,16 @@
+inteiro numero = 0
+inteiro fatorial = 1
+inteiro i = 1
+
+escreva("Digite um número: ")
+leia(numero)
+
+se numero é maior ou igual a 0 então
+    enquanto i é menor ou igual a numero então
+        fatorial = fatorial * i
+        i = i + 1
+    fim
+    escreva("Fatorial de ", numero, " é ", fatorial)
+senão
+    escreva("Número deve ser positivo")
+fim

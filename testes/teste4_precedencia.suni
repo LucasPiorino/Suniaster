@@ -1,0 +1,4 @@
+inteiro resultado1 = 10 + 5 * 2
+inteiro resultado2 = (10 + 5) * 2
+inteiro resultado3 = 20 / 4 - 1
+inteiro resultado4 = 15 % 4 + 2

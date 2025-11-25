@@ -1,0 +1,12 @@
+inteiro idade = 20
+booleano temCarteira = verdadeiro
+
+se idade >= 18 então
+    se temCarteira é igual a verdadeiro então
+        escreva("Pode dirigir")
+    senão
+        escreva("Precisa tirar carteira")
+    fim
+senão
+    escreva("Menor de idade")
+fim

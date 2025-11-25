@@ -89,6 +89,15 @@ class SuniasterListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by SuniasterParser#leitura.
+    def enterLeitura(self, ctx:SuniasterParser.LeituraContext):
+        pass
+
+    # Exit a parse tree produced by SuniasterParser#leitura.
+    def exitLeitura(self, ctx:SuniasterParser.LeituraContext):
+        pass
+
+
     # Enter a parse tree produced by SuniasterParser#atribuicao.
     def enterAtribuicao(self, ctx:SuniasterParser.AtribuicaoContext):
         pass
